@@ -143,6 +143,11 @@ nav img {
     transition: all 0.3s ease;
     text-align: center;
     opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.login-btn:hover {
+    background: #40c256;
 }
 
 /* Social Login */
@@ -223,4 +228,75 @@ nav img {
 
 i {
     padding-right: 5px;
+}
+
+/* Forgot Password Container */
+.reset-password-container {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    display: none;
+}
+
+/* Forgot Password Header */
+.reset-password-container h2 {
+    color: #fff;
+    font-size: 22px;
+    margin-bottom: 10px;
+}
+
+/* Forgot Password Description */
+.reset-password-container p {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+/* Forgot Password Input */
+.reset-password-container input {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.2);
+    color: #fff;
+    font-size: 16px;
+    outline: none;
+    margin-bottom: 15px;
+}
+
+.reset-password-container input::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* Forgot Password Button */
+.reset-password-container button {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background: #56ff72;
+    color: #141414;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.reset-password-container button:hover {
+    background: #4ae063;
+    transform: translateY(-2px);
+}
+
+/* Forgot Password Message */
+#resetMessage {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.reset-password-container hr {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    margin: 20px 0;
 }

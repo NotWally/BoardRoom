@@ -288,4 +288,91 @@ router.get("/user", async (req, res) => {
     }
 });
 
+// ✅ Forgot Password Route
+router.post("/forgot-password", async (req, res) => {
+    try {
+        const { email } = req.body;
+
+        const user = await User.findOne({ email });
+        if (!user)
+            return res.status(400).json({ message: "❌ Email not found." });
+
+        // ✅ Generate Reset Token & Expiry
+        const resetToken = crypto.randomBytes(32).toString("hex");
+
+        user.resetToken = resetToken;
+        user.resetTokenExpires = Date.now() + 3600000; // ✅ Expires in 1 hour
+
+        // ✅ FORCE SAVE THE USER
+        const updatedUser = await User.findOneAndUpdate(
+            { _id: user._id },
+            { $set: { resetToken, resetTokenExpires: user.resetTokenExpires } },
+            { new: true }
+        );
+
+        if (!updatedUser)
+            return res.status(500).json({ message: "❌ Error saving token." });
+
+        // ✅ Generate Password Reset Link
+        const resetUrl = `http://localhost:5000/reset-password.html?token=${resetToken}`;
+
+        // ✅ Send Reset Email
+        await transporter.sendMail({
+            from: '"BoardRoom Team" <no-reply@boardroom.com>',
+            to: email,
+            subject: "🔑 Reset Your Password - BoardRoom",
+            html: `
+                <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; padding: 20px; background-color: #f9f9f9;">
+                    <h2 style="color: #34d399; text-align: center;">Reset Your Password</h2>
+                    <p style="color: #333; text-align: center;">
+                        Click the button below to reset your password. This link expires in 1 hour.
+                    </p>
+                    <div style="text-align: center; margin: 20px 0;">
+                        <a href="${resetUrl}" style="background-color: #34d399; color: white; padding: 12px 24px; border-radius: 5px; text-decoration: none; font-size: 16px;">
+                            🔑 Reset Password
+                        </a>
+                    </div>
+                    <p style="color: #777; text-align: center;">Or copy and paste this link:</p>
+                    <p style="word-wrap: break-word; text-align: center; color: #555;">${resetUrl}</p>
+                </div>
+            `,
+        });
+
+        res.json({ message: "📧 Password reset link sent to your email." });
+    } catch (error) {
+        console.error("❌ Forgot Password Error:", error);
+        res.status(500).json({ message: "❌ Error sending reset link." });
+    }
+});
+
+// ✅ Reset Password Route
+router.post("/reset-password", async (req, res) => {
+    try {
+        const { token, newPassword } = req.body;
+
+        // ✅ Check if the user exists with this reset token & it's not expired
+        const user = await User.findOne({
+            resetToken: token,
+            resetTokenExpires: { $gt: Date.now() }, // Ensure token is still valid
+        });
+
+        if (!user)
+            return res
+                .status(400)
+                .json({ message: "❌ Invalid or expired token." });
+
+        // ✅ Hash New Password & Save
+        const hashedPassword = await bcrypt.hash(newPassword, 10);
+        user.password = hashedPassword;
+        user.resetToken = null;
+        user.resetTokenExpires = null;
+        await user.save();
+
+        res.json({ message: "✅ Password reset successful!" });
+    } catch (error) {
+        console.error("❌ Reset Password Error:", error);
+        res.status(500).json({ message: "❌ Error resetting password." });
+    }
+});
+
 module.exports = router;
