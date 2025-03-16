@@ -39,6 +39,8 @@ router.post("/resend-verification", async (req, res) => {
         if (user.verified)
             return res.status(400).json({ message: "Already verified" });
 
+        const email = user.email; // ✅ FIXED: Get user's email from database
+
         // ✅ Generate new verification token
         const verificationToken = crypto.randomBytes(32).toString("hex");
         user.verificationToken = verificationToken;
@@ -47,9 +49,52 @@ router.post("/resend-verification", async (req, res) => {
         const verificationUrl = `http://localhost:5000/api/auth/verify-email/${verificationToken}`;
         await transporter.sendMail({
             from: '"BoardRoom Team" <no-reply@boardroom.com>',
-            to: user.email,
-            subject: "Verify Your Email - BoardRoom",
-            html: `<p>Please click <a href="${verificationUrl}">here</a> to verify your email.</p>`,
+            to: email, // ✅ FIXED: Now using `user.email`
+            subject: "📧 Verify Your Email - BoardRoom",
+            html: `
+                <!DOCTYPE html>
+                <html lang="en">
+                <head>
+                    <meta charset="UTF-8">
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <title>Verify Your Email</title>
+                </head>
+                <body style="margin: 0; padding: 20px; font-family: Arial, sans-serif; background-color: #202020;">
+                    <div style="max-width: 600px; margin: auto; padding: 20px; border: 1px solid #ddd; border-radius: 10px; background-color: #141414;">
+                        <div style="text-align: center; padding-bottom: 20px;">
+                            <img src="https://bit.ly/4kImmno" alt="BoardRoom Logo" style="max-width: 150px; margin-bottom: 10px;">
+                            <h2 style="color: #56FF72; margin: 0;">Welcome to BoardRoom! 🎉</h2>
+                        </div>
+                        <p style="color: #fff; font-size: 16px; line-height: 1.5; text-align: center;">
+                            Thank you for signing up for <strong>BoardRoom</strong>! Before getting started, please verify your email address by clicking the button below.
+                        </p>
+                        <div style="text-align: center; margin: 20px 0;">
+                            <a href="${verificationUrl}" style="
+                                background-color: #56FF72;
+                                color: #141414;
+                                padding: 12px 24px;
+                                border-radius: 5px;
+                                text-decoration: none;
+                                font-size: 16px;
+                                font-weight: bold;
+                                display: inline-block;">
+                                ✅ Verify My Email
+                            </a>
+                        </div>
+                        <p style="color: #555; font-size: 14px; text-align: center;">
+                            Or copy and paste this link into your browser:
+                        </p>
+                        <p style="word-wrap: break-word; text-align: center; font-size: 14px; color: #777;">
+                            <a href="${verificationUrl}" style="color: #56FF72;">${verificationUrl}</a>
+                        </p>
+                        <hr style="border: 0; height: 1px; background-color: #ddd; margin: 20px 0;">
+                        <p style="color:rgb(177, 177, 177); font-size: 12px; text-align: center;">
+                            If you didn’t sign up for BoardRoom, please ignore this email or contact support.
+                        </p>
+                    </div>
+                </body>
+                </html>
+            `,
         });
 
         res.json({ message: "Verification email has been resent." });
@@ -119,9 +164,52 @@ router.post("/register", async (req, res) => {
         const verificationUrl = `http://localhost:5000/api/auth/verify-email/${verificationToken}`;
         await transporter.sendMail({
             from: '"BoardRoom Team" <no-reply@boardroom.com>',
-            to: email,
-            subject: "Verify Your Email - BoardRoom",
-            html: `<p>Please click <a href="${verificationUrl}">here</a> to verify your email.</p>`,
+            to: email, // ✅ FIXED: Now using `user.email`
+            subject: "📧 Verify Your Email - BoardRoom",
+            html: `
+                <!DOCTYPE html>
+                <html lang="en">
+                <head>
+                    <meta charset="UTF-8">
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <title>Verify Your Email</title>
+                </head>
+                <body style="margin: 0; padding: 20px; font-family: Arial, sans-serif; background-color: #202020;">
+                    <div style="max-width: 600px; margin: auto; padding: 20px; border: 1px solid #ddd; border-radius: 10px; background-color: #141414;">
+                        <div style="text-align: center; padding-bottom: 20px;">
+                            <img src="https://bit.ly/4kImmno" alt="BoardRoom Logo" style="max-width: 150px; margin-bottom: 10px;">
+                            <h2 style="color: #56FF72; margin: 0;">Welcome to BoardRoom! 🎉</h2>
+                        </div>
+                        <p style="color: #fff; font-size: 16px; line-height: 1.5; text-align: center;">
+                            Thank you for signing up for <strong>BoardRoom</strong>! Before getting started, please verify your email address by clicking the button below.
+                        </p>
+                        <div style="text-align: center; margin: 20px 0;">
+                            <a href="${verificationUrl}" style="
+                                background-color: #56FF72;
+                                color: #141414;
+                                padding: 12px 24px;
+                                border-radius: 5px;
+                                text-decoration: none;
+                                font-size: 16px;
+                                font-weight: bold;
+                                display: inline-block;">
+                                ✅ Verify My Email
+                            </a>
+                        </div>
+                        <p style="color: #555; font-size: 14px; text-align: center;">
+                            Or copy and paste this link into your browser:
+                        </p>
+                        <p style="word-wrap: break-word; text-align: center; font-size: 14px; color: #777;">
+                            <a href="${verificationUrl}" style="color: #56FF72;">${verificationUrl}</a>
+                        </p>
+                        <hr style="border: 0; height: 1px; background-color: #ddd; margin: 20px 0;">
+                        <p style="color:rgb(177, 177, 177); font-size: 12px; text-align: center;">
+                            If you didn’t sign up for BoardRoom, please ignore this email or contact support.
+                        </p>
+                    </div>
+                </body>
+                </html>
+            `,
         });
 
         res.json({
