@@ -1,0 +1,114 @@
+/* ✅ Reset Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Geologica", sans-serif;
+}
+
+/* ✅ Page Background */
+body {
+    background-color: #141414;
+    background-image: linear-gradient(
+            rgba(100, 100, 100, 0.1) 1px,
+            transparent 1px
+        ),
+        linear-gradient(90deg, rgba(100, 100, 100, 0.1) 1px, transparent 1px);
+    background-size: 20px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+}
+
+/* ✅ Verified Container */
+.verified-container {
+    background: rgba(30, 30, 30, 0.37);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 2px solid rgba(30, 30, 30, 0.7);
+    padding: 40px;
+    border-radius: 12px;
+    max-width: 450px;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 100000; /* ✅ Ensures it's above confetti */
+}
+
+#confetti-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+}
+
+/* ✅ Text Styles */
+h1 {
+    color: #56ff72;
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+p {
+    font-size: 18px;
+    margin-bottom: 15px;
+    color: #ffffff;
+}
+
+/* ✅ Button */
+button {
+    background-color: #56ff72;
+    color: #141414;
+    padding: 12px 25px;
+    border-radius: 6px;
+    font-size: 18px;
+    font-weight: bold;
+    transition: 0.3s;
+    cursor: pointer;
+    border: none;
+    width: 100%;
+    max-width: 150px;
+}
+
+button:hover {
+    background-color: #4ae063;
+    transform: translateY(-2px);
+}
+
+i {
+    margin-right: 10px;
+}
+
+.bld {
+    font-weight: bold;
+    color: #56ff72;
+}
+
+/* ✅ Responsive */
+@media (max-width: 600px) {
+    .verified-container {
+        padding: 30px;
+        max-width: 90%;
+    }
+
+    h1 {
+        font-size: 28px;
+    }
+
+    p {
+        font-size: 16px;
+    }
+
+    button {
+        font-size: 16px;
+        padding: 10px 20px;
+    }
+}

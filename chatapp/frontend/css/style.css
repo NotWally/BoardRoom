@@ -1,0 +1,122 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #141414;
+    background-image: linear-gradient(
+            rgba(100, 100, 100, 0.1) 1px,
+            transparent 1px
+        ),
+        linear-gradient(90deg, rgba(100, 100, 100, 0.1) 1px, transparent 1px);
+    background-size: 20px 20px;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Particle Styles */
+.particle {
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    background-color: #56ff7291;
+    border-radius: 50%;
+    opacity: 0;
+    animation: floatParticles 5s linear infinite;
+}
+
+@keyframes floatParticles {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-100vh);
+        opacity: 0;
+    }
+}
+
+nav {
+    position: absolute;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    padding: 10px 20px;
+    z-index: 1000;
+}
+
+nav img {
+    height: 30px; /* Adjust based on your design */
+}
+
+.nav-buttons {
+    display: flex;
+    gap: 5px;
+}
+
+.button {
+    padding: 8px 16px;
+    border: none;
+    background-color: transparent;
+    color: white;
+    font-family: "geologica", sans-serif;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 125px;
+}
+
+.button:hover {
+    color: #56ff72;
+    transform: translate(0, -2px);
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+    color: white;
+    font-family: "geologica", sans-serif;
+    text-align: center;
+}
+
+.container h1 {
+    margin-bottom: 20px;
+}
+
+.container p {
+    max-width: 500px;
+}
+
+.bld {
+    font-weight: bold;
+    color: #56ff72;
+}
+
+.cta-button {
+    margin-top: 20px;
+    display: inline-block;
+    padding: 12px 24px;
+    font-size: 18px;
+    font-weight: bold;
+    background: #56ff72;
+    color: #141414;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.cta-button:hover {
+    background: #45d463;
+    transform: translate(0, -2px);
+}
+
+i {
+    padding-right: 5px;
+}

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>BoardRoom</title>
+        <link rel="stylesheet" href="./css/style.css" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Geologica:wght@100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+            rel="stylesheet"
+        />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+        <script
+            src="https://kit.fontawesome.com/2953becb25.js"
+            crossorigin="anonymous"
+        ></script>
+        <link rel="icon" type="image/x-icon" href="./imgs/logo.png" />
+    </head>
+    <body>
+        <nav>
+            <img src="./imgs/logo.png" alt="BoardRoom logo" />
+            <div class="nav-buttons">
+                <button class="button">
+                    <i class="fas fa-sign-in-alt"></i> Login
+                </button>
+                <button class="button">
+                    <i class="fas fa-user-plus"></i> Register
+                </button>
+            </div>
+        </nav>
+
+        <div class="container">
+            <h1>Every connection matters!</h1>
+            <p>
+                <span class="bld">BoardRoom</span> is your go-to spot to
+                <span class="bld">chat</span> and
+                <span class="bld">connect</span> – Customize your own space to
+                talk, share memes, plan epic nights, or just vibe with your
+                crew. <span class="bld">Voice, video, and text</span>—all in
+                <span class="bld">one</span> place, built for whatever you’re
+                into.
+            </p>
+            <a href="register.html" class="cta-button"
+                ><i class="fas fa-rocket"></i> Get Started</a
+            >
+        </div>
+
+        <footer>
+            &copy; 2025 BoardRoom. All rights reserved.
+            <i class="fas fa-copyright"></i>
+        </footer>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const numParticles = 100; // Number of particles
+                const container = document.getElementById(
+                    "particles-container"
+                );
+
+                for (let i = 0; i < numParticles; i++) {
+                    let particle = document.createElement("div");
+                    particle.classList.add("particle");
+
+                    // Randomized properties with better spacing
+                    let size = Math.random() * 4 + 2; // Random size (2px - 6px)
+                    let left = (i / numParticles) * 100; // Distributes particles evenly across the screen
+                    let top = Math.random() * 100; // Random vertical position
+                    let duration = Math.random() * 4 + 4; // Random animation duration (4s - 8s)
+                    let delay = Math.random() * 3; // Random delay (0s - 3s)
+                    // Apply styles
+                    particle.style.width = `${size}px`;
+                    particle.style.height = `${size}px`;
+                    particle.style.left = `${left}vw`;
+                    particle.style.animationDuration = `${duration}s`;
+                    particle.style.animationDelay = `${delay}s`;
+
+                    container.appendChild(particle);
+                }
+
+                // Navigation for Login and Register buttons
+                document
+                    .querySelector(".button:nth-child(1)")
+                    .addEventListener("click", function () {
+                        window.location.href = "login.html";
+                    });
+
+                document
+                    .querySelector(".button:nth-child(2)")
+                    .addEventListener("click", function () {
+                        window.location.href = "register.html";
+                    });
+
+                // GSAP Fade-In Animation on Page Load
+                gsap.from("nav", { opacity: 0, y: -20, duration: 1 });
+                gsap.from(".container", {
+                    opacity: 0,
+                    y: 20,
+                    duration: 1.5,
+                    delay: 0.5,
+                });
+                gsap.from(".cta-button", {
+                    opacity: 1,
+                    scale: 0.9,
+                    duration: 1.2,
+                    delay: 1,
+                    ease: "power2.out",
+                    onComplete: function () {
+                        gsap.set(".cta-button", { clearProps: "transform" }); // Resets transform after animation ends
+                    },
+                });
+                gsap.from("footer", {
+                    opacity: 0,
+                    y: 10,
+                    duration: 1,
+                    delay: 1,
+                });
+
+                // Fade-in effect for particles
+                document
+                    .querySelectorAll(".particle")
+                    .forEach((particle, index) => {
+                        gsap.fromTo(
+                            particle,
+                            { opacity: 0 },
+                            { opacity: 1, duration: 0.8, delay: index * 0.02 }
+                        );
+                    });
+            });
+        </script>
+
+        <div id="particles-container"></div>
+    </body>
+</html>

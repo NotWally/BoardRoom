@@ -1,0 +1,226 @@
+/* Reset Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "geologica", sans-serif;
+}
+
+/* Body Styling */
+body {
+    background-color: #141414;
+    background-image: linear-gradient(
+            rgba(100, 100, 100, 0.1) 1px,
+            transparent 1px
+        ),
+        linear-gradient(90deg, rgba(100, 100, 100, 0.1) 1px, transparent 1px);
+    background-size: 20px 20px;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+nav {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    padding: 10px 20px;
+    opacity: 0;
+    transform: translateY(-20px); /* Move it up initially */
+}
+
+nav img {
+    height: 30px; /* Adjust based on your design */
+}
+
+.nav-buttons {
+    display: flex;
+    gap: 5px;
+}
+
+.button {
+    padding: 8px 16px;
+    border: none;
+    background-color: transparent;
+    color: white;
+    font-family: "geologica", sans-serif;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 125px;
+}
+
+.button:hover {
+    color: #56ff72;
+    transform: translate(0, -2px);
+}
+
+/* Login Container */
+.login-container {
+    justify-content: center;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    width: 450px;
+    text-align: center;
+    opacity: 0;
+}
+
+/* Login Form */
+.login-form h2 {
+    color: #fff;
+    margin-bottom: 20px;
+    font-size: 24px;
+    opacity: 0;
+}
+
+.input-group {
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 15px;
+    opacity: 0;
+}
+
+.input-group i {
+    color: #fff;
+    margin-right: 10px;
+}
+
+.input-group input {
+    border: none;
+    outline: none;
+    background: transparent;
+    color: #fff;
+    font-size: 16px;
+    width: 100%;
+}
+
+.input-group input::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* Extra Options */
+.extra-options {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 15px;
+    opacity: 0;
+}
+
+.extra-options a {
+    color: #56ff72;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.extra-options a:hover {
+    text-decoration: underline;
+}
+
+.login-btn {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background: #56ff72;
+    color: #141414;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+    opacity: 0;
+}
+
+/* Social Login */
+.social-login {
+    margin-top: 15px;
+    opacity: 0;
+}
+
+.social-login p {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.social-buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
+.google-btn,
+.facebook-btn {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    margin: 0 5px;
+    opacity: 0;
+}
+
+.google-btn {
+    background: #db4437;
+    color: white;
+}
+
+.google-btn:hover {
+    background: #c1351d;
+}
+
+.facebook-btn {
+    background: #3b5998;
+    color: white;
+}
+
+.facebook-btn:hover {
+    background: #2d4373;
+}
+
+/* Signup Link */
+.signup-link {
+    margin-top: 15px;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 14px;
+    opacity: 0;
+}
+
+.signup-link a {
+    color: #56ff72;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.signup-link a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 400px) {
+    .login-container {
+        width: 90%;
+        padding: 1.5rem;
+    }
+}
+
+i {
+    padding-right: 5px;
+}

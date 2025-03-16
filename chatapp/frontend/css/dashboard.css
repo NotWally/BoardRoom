@@ -1,0 +1,68 @@
+/* ✅ Reset Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Geologica", sans-serif;
+}
+
+/* ✅ Body Styling */
+body {
+    background-color: #141414;
+    background-image: linear-gradient(
+            rgba(100, 100, 100, 0.1) 1px,
+            transparent 1px
+        ),
+        linear-gradient(90deg, rgba(100, 100, 100, 0.1) 1px, transparent 1px);
+    background-size: 20px 20px;
+    height: 100vh;
+}
+
+/* ✅ Verification Section */
+#verificationSection {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    background-color: #56ff72;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+#verificationSection p {
+    padding: 10px;
+    color: #141414;
+    font-weight: bold;
+}
+
+#verificationSection button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    border: none;
+    background-color: #141414;
+    color: white;
+    font-family: "Geologica", sans-serif;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+#verificationSection button:hover {
+    background-color: #202020;
+    color: #56ff72;
+    transform: translate(0, -2px);
+}
+
+.btn {
+    margin-top: 10px;
+    padding: 10px 20px;
+    border: none;
+    background-color: #141414;
+    color: white;
+    font-family: "Geologica", sans-serif;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
