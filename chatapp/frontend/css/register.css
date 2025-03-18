@@ -167,15 +167,6 @@ nav img {
     background: #c1351d;
 }
 
-.facebook-btn {
-    background: #3b5998;
-    color: white;
-}
-
-.facebook-btn:hover {
-    background: #2d4373;
-}
-
 /* Login Link */
 .login-link {
     margin-top: 15px;
@@ -203,4 +194,14 @@ nav img {
 
 i {
     padding-right: 5px;
+}
+
+#g_id_onload,
+#g_id_signin {
+    opacity: 0;
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
 }

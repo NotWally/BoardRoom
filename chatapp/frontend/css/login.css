@@ -192,15 +192,6 @@ nav img {
     background: #c1351d;
 }
 
-.facebook-btn {
-    background: #3b5998;
-    color: white;
-}
-
-.facebook-btn:hover {
-    background: #2d4373;
-}
-
 /* Signup Link */
 .signup-link {
     margin-top: 15px;
@@ -299,4 +290,14 @@ i {
 .reset-password-container hr {
     border: 1px solid rgba(255, 255, 255, 0.1);
     margin: 20px 0;
+}
+
+#g_id_onload,
+#g_id_signin {
+    display: transparent;
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
 }

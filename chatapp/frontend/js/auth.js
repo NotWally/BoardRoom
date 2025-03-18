@@ -6,13 +6,11 @@ async function registerUser(event) {
     const password = document.getElementById("password").value;
     const confirmPassword = document.getElementById("confirmPassword").value;
 
-    // ✅ Ensure passwords match
     if (password !== confirmPassword) {
         alert("❌ Passwords do not match. Please try again.");
         return;
     }
 
-    // ✅ Convert username and email to lowercase
     username = username.toLowerCase();
     email = email.toLowerCase();
 

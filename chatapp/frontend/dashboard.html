@@ -34,8 +34,220 @@
 
         <!-- ✅ Dashboard Content -->
         <div class="dashboard-container">
-            <h1>Welcome to BoardRoom</h1>
-            <button id="logout" class="btn btn-danger">Logout</button>
+            <h1 id="welcomeMessage"></h1>
+            <hr />
+
+            <!-- ✅ Change Username Section -->
+            <div class="change-username">
+                <h2>Change Username</h2>
+                <p>Enter a new username below:</p>
+                <input
+                    type="text"
+                    id="newUsername"
+                    placeholder="Enter new username"
+                    class="input-field"
+                />
+                <button id="changeUsername" class="btn">Change Username</button>
+            </div>
+            <hr />
+
+            <button id="deleteAccount" class="btn btn-danger">
+                Delete Account
+            </button>
+            <button id="logout" class="btn btn-warning">Logout</button>
+            <hr />
+
+            <div class="credits">
+                <h1>Thanks to everyone who's signed up!</h1>
+                <p id="users"></p>
+            </div>
         </div>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", async () => {
+                const token = localStorage.getItem("token");
+
+                if (!token) {
+                    window.location.href = "login.html";
+                    return;
+                }
+
+                let users = []; // Store usernames globally
+                let currentUserIndex = 0; // Keep track of the current user index
+
+                async function fetchUsernames() {
+                    try {
+                        const response = await fetch("/api/auth/all-users", {
+                            headers: { Authorization: `Bearer ${token}` },
+                        });
+
+                        if (!response.ok)
+                            throw new Error("Failed to fetch users");
+
+                        const fetchedUsers = await response.json();
+                        if (fetchedUsers.length > 0) {
+                            users = fetchedUsers.map((user) => user.username); // Store usernames
+                        }
+                    } catch (error) {
+                        console.error("⚠️ Error fetching users:", error);
+                        document.getElementById("users").innerText =
+                            "Error loading users.";
+                    }
+                }
+
+                function cycleUsernames() {
+                    const usersElement = document.getElementById("users");
+
+                    if (users.length > 0) {
+                        usersElement.innerText = `✨ ${users[currentUserIndex]} ✨`;
+                        currentUserIndex =
+                            (currentUserIndex + 1) % users.length;
+                    }
+                }
+
+                async function fetchUserData() {
+                    try {
+                        console.log("🔍 Fetching user data...");
+
+                        const response = await fetch("/api/auth/user", {
+                            headers: { Authorization: `Bearer ${token}` },
+                        });
+
+                        if (!response.ok) {
+                            console.error("❌ Failed to fetch user data.");
+                            localStorage.removeItem("token");
+                            window.location.href = "login.html";
+                            return;
+                        }
+
+                        const user = await response.json();
+                        console.log("✅ User data fetched:", user);
+
+                        const welcomeMessage =
+                            document.getElementById("welcomeMessage");
+                        if (!welcomeMessage) {
+                            console.error(
+                                "⚠️ Element with ID 'welcomeMessage' not found."
+                            );
+                            return;
+                        }
+
+                        // ✅ Set the greeting only ONCE
+                        if (!welcomeMessage.innerHTML.trim()) {
+                            const greetings = [
+                                `🎉 Welcome, <span class='highlight'>${user.username}</span>! Let's go!`,
+                                `🚀 Hey, <span class='highlight'>${user.username}</span>! You're in!`,
+                                `🔥 You made it, <span class='highlight'>${user.username}</span>! Dive in!`,
+                                `👋 Glad to have you, <span class='highlight'>${user.username}</span>! Let's roll!`,
+                                `✨ Hi there, <span class='highlight'>${user.username}</span>! Ready?`,
+                            ];
+
+                            const randomGreeting =
+                                greetings[
+                                    Math.floor(Math.random() * greetings.length)
+                                ];
+
+                            const finalMessage = `<p class='subtext'>You're one of <strong>${user.totalUsers}</strong> users! 🚀</p>`;
+
+                            welcomeMessage.innerHTML = `<div class='welcome-container'>${randomGreeting} ${finalMessage}</div>`;
+                            welcomeMessage.style.display = "block";
+                        }
+
+                        // ✅ Update the username dynamically without changing the greeting
+                        document.querySelector(".highlight").innerText =
+                            user.username;
+                    } catch (error) {
+                        console.error("⚠️ Error fetching user data:", error);
+                    }
+                }
+
+                async function changeUsername() {
+                    const newUsername = document
+                        .getElementById("newUsername")
+                        .value.trim();
+
+                    if (!newUsername) {
+                        alert("⚠️ Please enter a new username.");
+                        return;
+                    }
+
+                    try {
+                        const response = await fetch(
+                            "/api/auth/change-username",
+                            {
+                                method: "PATCH",
+                                headers: {
+                                    "Content-Type": "application/json",
+                                    Authorization: `Bearer ${token}`,
+                                },
+                                body: JSON.stringify({ newUsername }),
+                            }
+                        );
+
+                        const result = await response.json();
+
+                        if (response.ok) {
+                            alert("✅ Username changed successfully!");
+                            fetchUserData(); // Refresh username on page
+                        } else {
+                            alert(`❌ Error: ${result.message}`);
+                        }
+                    } catch (error) {
+                        console.error("⚠️ Error changing username:", error);
+                    }
+                }
+
+                async function deleteAccount() {
+                    if (
+                        !confirm(
+                            "Are you sure you want to delete your account? This action cannot be undone."
+                        )
+                    ) {
+                        return;
+                    }
+
+                    try {
+                        const response = await fetch(
+                            "/api/auth/delete-account",
+                            {
+                                method: "DELETE",
+                                headers: { Authorization: `Bearer ${token}` },
+                            }
+                        );
+
+                        if (response.ok) {
+                            alert("✅ Account deleted successfully.");
+                            localStorage.removeItem("token");
+                            window.location.href = "signup.html";
+                        } else {
+                            alert("❌ Failed to delete account.");
+                        }
+                    } catch (error) {
+                        console.error("⚠️ Error deleting account:", error);
+                    }
+                }
+
+                document
+                    .getElementById("deleteAccount")
+                    .addEventListener("click", deleteAccount);
+                document
+                    .getElementById("changeUsername")
+                    .addEventListener("click", changeUsername);
+
+                await fetchUserData();
+                await fetchUsernames();
+
+                // ✅ Keep cycling usernames without resetting
+                setInterval(() => {
+                    cycleUsernames();
+                }, 2500);
+
+                // ✅ Refresh user data & username list every second, but don't reset cycling
+                setInterval(() => {
+                    fetchUserData();
+                    fetchUsernames();
+                }, 1000);
+            });
+        </script>
     </body>
 </html>

@@ -16,11 +16,18 @@
         ></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
         <link rel="stylesheet" href="css/register.css" />
+        <script
+            src="https://accounts.google.com/gsi/client"
+            async
+            defer
+        ></script>
         <link rel="icon" type="image/x-icon" href="./imgs/a2.png" />
     </head>
     <body>
-        <nav class="nav">
-            <img src="./imgs/logo.png" alt="BoardRoom logo" />
+        <nav>
+            <a href="./index.html"
+                ><img src="./imgs/logo.png" alt="BoardRoom logo"
+            /></a>
             <div class="nav-buttons">
                 <button
                     class="button"
@@ -81,14 +88,24 @@
                 <button type="submit" class="register-btn">Register</button>
 
                 <div class="social-login">
-                    <p>Or sign up with</p>
+                    <p>Or register with</p>
                     <div class="social-buttons">
-                        <button class="google-btn">
-                            <i class="fab fa-google"></i> Google
-                        </button>
-                        <button class="facebook-btn">
-                            <i class="fab fa-facebook-f"></i> Facebook
-                        </button>
+                        <div
+                            style="
+                                position: relative;
+                                display: inline-block;
+                                width: 100%;
+                            "
+                        >
+                            <!-- ✅ Invisible Google Button -->
+                            <div id="g_id_signin"></div>
+
+                            <!-- ✅ Fully Custom Google Button -->
+                            <button id="customGoogleBtn" class="google-btn">
+                                <i class="fab fa-google"></i>
+                                Google
+                            </button>
+                        </div>
                     </div>
                 </div>
 
@@ -98,46 +115,38 @@
             </form>
         </div>
 
+        <script src="js/google-auth.js"></script>
+
         <script>
             document.addEventListener("DOMContentLoaded", function () {
-                gsap.to("nav", { opacity: 1, y: 0, duration: 1 });
-                gsap.to(".register-container", {
-                    opacity: 1,
-                    duration: 0.5,
-                    ease: "power2.out",
+                const tl = gsap.timeline({
+                    defaults: { opacity: 0, ease: "power2.out" },
                 });
-                gsap.to(".register-form h2", {
-                    opacity: 1,
-                    duration: 0.5,
-                    delay: 0.5,
-                });
-                gsap.to(".input-group", {
-                    opacity: 1,
-                    duration: 0.5,
-                    stagger: 0.2,
-                    delay: 0.8,
-                });
-                gsap.to(".register-btn", {
-                    opacity: 1,
-                    duration: 0.5,
-                    delay: 1.5,
-                });
-                gsap.to(".social-login", {
-                    opacity: 1,
-                    duration: 0.5,
-                    delay: 1.8,
-                });
-                gsap.to(".social-buttons button", {
-                    opacity: 1,
-                    duration: 0.5,
-                    stagger: 0.2,
-                    delay: 2,
-                });
-                gsap.to(".login-link", {
-                    opacity: 1,
-                    duration: 0.5,
-                    delay: 2.2,
-                });
+
+                tl.to("nav", { opacity: 1, y: 0, duration: 0.8 })
+                    .to(
+                        ".register-container",
+                        { opacity: 1, duration: 0.5 },
+                        "-=0.3"
+                    )
+                    .to(
+                        ".register-form h2",
+                        { opacity: 1, duration: 0.5 },
+                        "-=0.3"
+                    )
+                    .to(
+                        ".input-group",
+                        { opacity: 1, duration: 0.5, stagger: 0.2 },
+                        "-=0.2"
+                    )
+                    .to(".register-btn", { opacity: 1, duration: 0.5 }, "-=0.2")
+                    .to(".social-login", { opacity: 1, duration: 0.5 }, "-=0.2")
+                    .to(
+                        ".social-buttons div, .social-buttons button",
+                        { opacity: 1, duration: 0.5, stagger: 0.2 },
+                        "-=0.2"
+                    )
+                    .to(".login-link", { opacity: 1, duration: 0.5 }, "-=0.2");
             });
         </script>
 
