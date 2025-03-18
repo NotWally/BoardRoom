@@ -82,7 +82,10 @@ npm start
 
 Feel free to contribute:
 
-```bash
+```
+
+```
+bash
 git checkout -b new-feature
 git commit -m "Added new feature"
 git push origin new-feature
