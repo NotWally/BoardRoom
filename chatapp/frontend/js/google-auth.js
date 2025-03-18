@@ -2,8 +2,7 @@ document.addEventListener("DOMContentLoaded", function () {
     console.log("✅ Initializing Google Login...");
 
     google.accounts.id.initialize({
-        client_id:
-            "682477660455-k002ogubi29n1iljsij4gmgohso186pq.apps.googleusercontent.com",
+        client_id: process.env.GOOGLE_CLIENT_ID,
         callback: handleCredentialResponse,
         ux_mode: "popup", // ✅ Force popup mode (bypasses FedCM issues)
     });
