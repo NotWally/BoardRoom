@@ -94,16 +94,6 @@ npm start
 | GET    | `/api/auth/user` | Get current user data |
 | DELETE | `/api/auth/delete-account` | Delete user account |
 
-## 🎨 Screenshots
-
-✅ **Login/Register Page:**
-![image](https://github.com/user-attachments/assets/1338b6dd-eb2d-4d6d-9872-64b6d4e9cfad)
-![image](https://github.com/user-attachments/assets/8b337e3d-6b7a-48ed-95ab-6873dc528778)
-![image](https://github.com/user-attachments/assets/bda36490-7051-404c-a95e-f16b260c9ac3)
-![image](https://github.com/user-attachments/assets/2bcd5a47-4d02-426a-bada-e4269edfd3b1)
-![image](https://github.com/user-attachments/assets/4ddb6f59-9bae-431a-a4a5-9951a4a9a004)
-
-
 ## 🤝 Contributing
 
 Feel free to contribute:
@@ -113,6 +103,13 @@ git checkout -b new-feature
 git commit -m "Added new feature"
 git push origin new-feature
 ```
+## 🎨 Screenshots
+✅ **Login/Register Page:**
+![image](https://github.com/user-attachments/assets/1338b6dd-eb2d-4d6d-9872-64b6d4e9cfad)
+![image](https://github.com/user-attachments/assets/8b337e3d-6b7a-48ed-95ab-6873dc528778)
+![image](https://github.com/user-attachments/assets/bda36490-7051-404c-a95e-f16b260c9ac3)
+![image](https://github.com/user-attachments/assets/2bcd5a47-4d02-426a-bada-e4269edfd3b1)
+![image](https://github.com/user-attachments/assets/4ddb6f59-9bae-431a-a4a5-9951a4a9a004)
 
 ## 📜 License
 
