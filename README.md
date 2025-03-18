@@ -78,7 +78,15 @@ GOOGLE_CLIENT_ID=your_google_client_id
 npm start
 # 📌 Visit: [http://localhost:5000/](http://localhost:5000/)
 
-## 📜 API Endpoints
+## 🤝 Contributing
+
+Feel free to contribute:
+
+```bash
+git checkout -b new-feature
+git commit -m "Added new feature"
+git push origin new-feature
+```
 
 ### 🔐 Authentication Routes
 
@@ -94,15 +102,6 @@ npm start
 | GET    | `/api/auth/user` | Get current user data |
 | DELETE | `/api/auth/delete-account` | Delete user account |
 
-## 🤝 Contributing
-
-Feel free to contribute:
-
-```bash
-git checkout -b new-feature
-git commit -m "Added new feature"
-git push origin new-feature
-```
 ## 🎨 Screenshots
 ✅ **Login/Register Page:**
 ![image](https://github.com/user-attachments/assets/1338b6dd-eb2d-4d6d-9872-64b6d4e9cfad)
